@@ -1,0 +1,199 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Rink palette. Colors carry meaning:
+ *   ice       background
+ *   boards    text and dark surfaces
+ *   blue line primary actions, confirmed states, my position
+ *   red line  debts, late cancellation, destructive actions
+ *   goalie    everything about goalies and their fees
+ *   scraper   borders, empty slots (never body text: below 4.5:1)
+ */
+:root {
+  --ice: #f2f5f7;
+  --boards: #15212c;
+  --blue-line: #1d4ed8;
+  --red-line: #c8102e;
+  --goalie: #d99a1e;
+  --scraper: #8795a3;
+
+  --background: var(--ice);
+  --foreground: var(--boards);
+  --surface: #ffffff;
+  --surface-2: #e6ecf0;
+  --card: var(--surface);
+  --card-foreground: var(--boards);
+  --popover: #ffffff;
+  --popover-foreground: var(--boards);
+  --primary: var(--blue-line);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--boards);
+  --muted: var(--surface-2);
+  --muted-foreground: #526170;
+  --accent: #dfe7fb;
+  --accent-foreground: #173eab;
+  --destructive: var(--red-line);
+  --destructive-foreground: #ffffff;
+  --debt: var(--red-line);
+  --goalie-fill: var(--goalie);
+  --goalie-foreground: var(--boards);
+  --goalie-text: #8a5a00;
+  --border: #d3dbe2;
+  --input: #7d8b99;
+  --ring: var(--blue-line);
+  --slot-empty: var(--scraper);
+
+  /* Rink drawing */
+  --rink-ice: #ffffff;
+  --rink-boards: var(--boards);
+  --rink-red: var(--red-line);
+  --rink-blue: var(--blue-line);
+  --rink-crease: #cfe0ff;
+
+  --radius: 0.5rem;
+  color-scheme: light;
+}
+
+/* "Stadium at night" */
+.dark {
+  --background: #0f1b26;
+  --foreground: #e6edf2;
+  --surface: #162634;
+  --surface-2: #1e3244;
+  --card: var(--surface);
+  --card-foreground: #e6edf2;
+  --popover: #1b2d3d;
+  --popover-foreground: #e6edf2;
+  --primary: #7fa6ff;
+  --primary-foreground: #0f1b26;
+  --secondary: var(--surface-2);
+  --secondary-foreground: #e6edf2;
+  --muted: var(--surface-2);
+  --muted-foreground: #9aadbe;
+  --accent: #1f3358;
+  --accent-foreground: #c9d9ff;
+  --destructive: #ff7a8a;
+  --destructive-foreground: #0f1b26;
+  --debt: #ff7a8a;
+  --goalie-fill: #f2b84b;
+  --goalie-foreground: #0f1b26;
+  --goalie-text: #f2b84b;
+  --border: #2a3f52;
+  --input: #6b7f92;
+  --ring: #7fa6ff;
+  --slot-empty: #6b7f92;
+
+  --rink-ice: #1a2b3a;
+  --rink-boards: #9aadbe;
+  --rink-red: #ff7a8a;
+  --rink-blue: #7fa6ff;
+  --rink-crease: #22406e;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.625rem;
+  --text-title: 1.75rem;
+  --text-title--line-height: 2rem;
+  --text-display: 2.5rem;
+  --text-display--line-height: 2.625rem;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-debt: var(--debt);
+  --color-goalie: var(--goalie-fill);
+  --color-goalie-foreground: var(--goalie-foreground);
+  --color-goalie-text: var(--goalie-text);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-slot-empty: var(--slot-empty);
+  --color-boards: var(--boards);
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/60;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Scoreboard and jersey numbers: condensed, heavy, tabular. */
+  .font-display {
+    font-stretch: 72%;
+    font-weight: 750;
+    letter-spacing: -0.005em;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .font-display-medium {
+    font-stretch: 80%;
+    font-weight: 620;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .measure {
+    max-width: 70ch;
+  }
+  .pb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom), 0px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
