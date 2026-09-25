@@ -47,6 +47,10 @@
   --input: #7d8b99;
   --ring: var(--blue-line);
   --slot-empty: var(--scraper);
+  --slot-taken: var(--boards);
+  --slot-taken-text: #ffffff;
+  --slot-mine: var(--blue-line);
+  --slot-mine-text: #ffffff;
 
   /* Rink drawing */
   --rink-ice: #ffffff;
@@ -87,6 +91,10 @@
   --input: #6b7f92;
   --ring: #7fa6ff;
   --slot-empty: #6b7f92;
+  --slot-taken: #c8d4de;
+  --slot-taken-text: #0f1b26;
+  --slot-mine: #7fa6ff;
+  --slot-mine-text: #0f1b26;
 
   --rink-ice: #1a2b3a;
   --rink-boards: #9aadbe;
@@ -186,6 +194,23 @@
   .pb-safe {
     padding-bottom: max(env(safe-area-inset-bottom), 0px);
   }
+}
+
+/* The only orchestrated motion in the app: my slot fills when I register. */
+@keyframes slot-fill {
+  from {
+    transform: scale(0.3);
+    opacity: 0.2;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.rink-slot-enter {
+  animation: slot-fill 260ms cubic-bezier(0.2, 0.8, 0.2, 1.15) both;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 @media (prefers-reduced-motion: reduce) {

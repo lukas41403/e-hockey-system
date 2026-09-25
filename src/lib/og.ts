@@ -1,7 +1,7 @@
 // Open Graph tags for link previews of marketplace posts. Pure functions, used by the
 // Vercel middleware (middleware.ts) and covered by unit tests.
-import { formatDateTimeLong } from '@/lib/dates'
-import { formatMoney, type Currency } from '@/lib/money'
+import { formatDateTimeLong } from './dates'
+import { formatMoney, type Currency } from './money'
 
 export interface OgMeta {
   title: string

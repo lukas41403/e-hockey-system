@@ -132,11 +132,12 @@ begin
 end;
 $$;
 
+-- Pins the business clock; never later than the real "now", so no record is dated in the future.
 create function pg_temp.at(p_ts timestamptz)
 returns void
 language sql
 as $$
-  select set_config('app.now', p_ts::text, false);
+  select set_config('app.now', least(p_ts, now() - interval '2 minutes')::text, false);
 $$;
 
 -- Local wall-clock time in Bratislava / Prague, `p_weeks` weeks from the current week.

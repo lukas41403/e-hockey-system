@@ -41,53 +41,35 @@ Rozhodnutia sú v `DECISIONS.md`.
 
 - [x] money, dates, iban, phone, pricing, paybysquare, spd, whatsapp, csv, og, errors
 
-## M2 Prihlásenie, onboarding, profil, partičky
+## M2 až M6: stav kódu (napísané, typecheck, lint a unit testy zelené; e2e zatiaľ nie)
 
-- [ ] Supabase klient, auth provider, chránené routy
-- [ ] prihlásenie OTP, rýchle prihlásenie (len DEV)
-- [ ] onboarding, profil, téma
-- [ ] založenie partičky, pozvánka, členovia, nastavenia
-- [ ] dizajnový systém (tokeny, typografia, komponenty)
-- [ ] screenshot kontrola
-- [ ] commit M2
+Kód je napísaný a ručne overený v prehliadači len čiastočne (Domov, detail termínu so súpiskou, Moje financie, platba s QR). Ostatné toky sú napísané, ale neoverené v prehliadači ani e2e.
 
-## M3 Termíny
+- [x] Supabase klient, auth provider, chránené routy, onboarding redirect
+- [x] prihlásenie OTP (e-mail + 6-miestny kód), rýchle prihlásenie len v DEV (lazy, vypadne z produkčného buildu; treba overiť grepom `dist`)
+- [x] onboarding, profil, téma (systém / svetlá / tmavá)
+- [x] založenie partičky, pozvánka (odkaz, zdieľanie, pregenerovanie), členovia (roly, odobratie, WhatsApp), nastavenia
+- [x] dizajnový systém (tokeny, Archivo s osou šírky, 44 px ciele, spodný panel na mobile)
+- [x] Domov (upozornenie na postup, najbližší termín, ďalšie termíny, zostatky), overené v prehliadači
+- [x] detail termínu so súpiskou na ľade (SVG, na výšku / na šírku, môj slot, animácia), overené v prehliadači
+- [x] prihlasovanie, čakacia listina, odhlásenie s dialógom pri neskorom odhlásení, optimistické aktualizácie, realtime
+- [x] admin: vytvorenie (opakovanie), úprava, pridanie a odobratie hráča, schválenie hostí, zrušenie termínu
+- [x] platby: Pay by square / SPD, QR, kopírovanie údajov, „Zaplatil som“, zrušenie; Moje financie s históriou (overené v prehliadači)
+- [x] dochádzka a uzávierka so súhrnom, znovuotvorenie
+- [x] financie partičky: súhrn, platby na potvrdenie, hotovosť, oprava zostatku, vyplácanie brankárov (QR / hotovosť), tabuľky hráčov a termínov, CSV
+- [x] burza s filtrami, verejná stránka príspevku, zverejnenie a stiahnutie, OG middleware (unit test), `vercel.json`
+- [x] superadmin `/admin`
+- [x] PWA ikony a OG obrázok (`public/`)
+- [ ] commity M2 až M6 samostatne (zatiaľ jeden spoločný commit „M2–M6 WIP“)
 
-- [ ] zoznam termínov, domov
-- [ ] detail so súpiskou na ľade
-- [ ] prihlasovanie, čakacia listina, odhlásenie, upozornenie na postup
-- [ ] admin: vytvorenie (opakovanie), úprava, pridanie a odobratie hráča, zrušenie
-- [ ] realtime
-- [ ] commit M3
+## Zostáva (ďalšia session)
 
-## M4 Platby
-
-- [ ] Pay by square, SPD, QR, kopírovanie údajov
-- [ ] nahlásenie, zrušenie, potvrdenie, zamietnutie, hotovosť
-- [ ] moje financie
-- [ ] commit M4
-
-## M5 Uzávierka a financie partičky
-
-- [ ] dochádzka a uzávierka, znovuotvorenie
-- [ ] vyplácanie brankárov
-- [ ] financie partičky, tabuľky, CSV export
-- [ ] commit M5
-
-## M6 Burza a zdieľanie
-
-- [ ] burza s filtrami, zverejnenie, schvaľovanie hostí
-- [ ] verejná stránka príspevku
-- [ ] Open Graph (Vercel middleware)
-- [ ] WhatsApp odkazy, Web Share
-- [ ] commit M6
-
-## M7 Doladenie
-
-- [ ] dizajnová kontrola 8.6 (390 / 1440, obe témy)
-- [ ] PWA, offline shell, ikony
-- [ ] prístupnosť, prázdne a chybové stavy
-- [ ] kompletné e2e
-- [ ] README
-- [ ] akceptačné kritériá (sekcia 14)
-- [ ] commit M7
+- [ ] opraviť v seede časy (upravené `pg_temp.at`, treba `npx supabase db reset` a znova `supabase test db`)
+- [ ] ručne overiť v prehliadači: prihlásenie kódom, onboarding, pozvánka, partička, admin akcie, uzávierka, vyplácanie, burza, verejný príspevok
+- [ ] e2e testy (7 tokov zo sekcie 11, mobil aj desktop) + axe; odstrániť `e2e/smoke.spec.ts` alebo rozšíriť
+- [ ] offline hláška v app shelle overiť (service worker cez vite-plugin-pwa)
+- [ ] dizajnová kontrola 8.6 (390 / 1440 px, obe témy), kontrast tmavej témy
+- [ ] overiť, že produkčný build neobsahuje panel rýchleho prihlásenia (`grep -r hokej123 dist`)
+- [ ] README (požiadavky, lokálne spustenie, seed účty, nasadenie Supabase Cloud + Vercel, e-mailová šablóna, premenné prostredia)
+- [ ] `npm run check` celý na čistom klone
+- [ ] akceptačné kritériá (sekcia 14) jedno po druhom
