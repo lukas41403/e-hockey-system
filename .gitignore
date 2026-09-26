@@ -17,3 +17,6 @@ supabase/.temp
 .vscode/*
 !.vscode/extensions.json
 *.tsbuildinfo
+
+# Local tool configuration
+.claude/
